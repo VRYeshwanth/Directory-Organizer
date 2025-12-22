@@ -1,0 +1,25 @@
+{
+    "name": "directory-organizer",
+    "version": "1.0.0",
+    "main": "main.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "electron ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/VRYeshwanth/Directory-Organizer.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/VRYeshwanth/Directory-Organizer/issues"
+    },
+    "homepage": "https://github.com/VRYeshwanth/Directory-Organizer#readme",
+    "description": "",
+    "dependencies": {
+        "electron": "^39.2.7"
+    }
+}
