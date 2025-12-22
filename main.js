@@ -1,6 +1,7 @@
 import { app, BrowserWindow, dialog, ipcMain } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
+import { organizeDirectory } from "./organizer.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -29,6 +30,13 @@ ipcMain.handle("select-directory", async () => {
     if (result.canceled) return null;
 
     return result.filePaths[0];
+});
+
+ipcMain.handle("organize-directory", async (_event, directoryPath) => {
+    if (!directoryPath) throw new Error("No directory path provided !!");
+
+    const result = await organizeDirectory(directoryPath);
+    return result;
 });
 
 app.whenReady().then(createWindow);

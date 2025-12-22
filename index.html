@@ -27,15 +27,30 @@
         const selectedFolderTag = document.querySelector(".folder-selected");
         const chooseBtn = document.querySelector(".choose-btn");
         const organizeBtn = document.querySelector(".organize-btn");
+        const statusTag = document.querySelector(".status");
 
+        let selectedFolderPath = null;
         organizeBtn.disabled = true;
 
         chooseBtn.addEventListener("click", async () => {
             const folderPath = await window.api.selectDirectory();
             if (folderPath) {
+                selectedFolderPath = folderPath;
                 selectedFolderTag.innerText = folderPath;
                 organizeBtn.disabled = false;
             }
+        });
+
+        organizeBtn.addEventListener("click", async () => {
+            if (!selectedFolderPath) {
+                statusTag.innerText = "Please select a folder first";
+                return;
+            }
+
+            const result = await window.api.organizeDirectory(
+                selectedFolderPath
+            );
+            statusTag.innerText = result.status;
         });
     </script>
 </html>

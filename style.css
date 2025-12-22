@@ -29,7 +29,8 @@ body {
 .folder-info-div > h2,
 .status-div > h2,
 .folder-selected,
-.heading {
+.heading,
+.status {
     text-align: center;
 }
 
