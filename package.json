@@ -4,8 +4,8 @@
     "main": "main.js",
     "type": "module",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "electron ."
+        "start": "electron .",
+        "build": "electron-builder"
     },
     "repository": {
         "type": "git",
@@ -19,7 +19,15 @@
     },
     "homepage": "https://github.com/VRYeshwanth/Directory-Organizer#readme",
     "description": "",
-    "dependencies": {
-        "electron": "^39.2.7"
+    "build": {
+        "appId": "com.yeshwanth.directoryorganizer",
+        "productName": "Directory Organizer",
+        "win": {
+            "target": "nsis"
+        }
+    },
+    "devDependencies": {
+        "electron": "^39.2.7",
+        "electron-builder": "^26.0.12"
     }
 }
