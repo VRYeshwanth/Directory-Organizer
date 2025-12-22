@@ -23,4 +23,19 @@
             </div>
         </div>
     </body>
+    <script>
+        const selectedFolderTag = document.querySelector(".folder-selected");
+        const chooseBtn = document.querySelector(".choose-btn");
+        const organizeBtn = document.querySelector(".organize-btn");
+
+        organizeBtn.disabled = true;
+
+        chooseBtn.addEventListener("click", async () => {
+            const folderPath = await window.api.selectDirectory();
+            if (folderPath) {
+                selectedFolderTag.innerText = folderPath;
+                organizeBtn.disabled = false;
+            }
+        });
+    </script>
 </html>

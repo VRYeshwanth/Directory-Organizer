@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, dialog, ipcMain } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -20,5 +20,15 @@ function createWindow() {
 
     mainWindow.loadFile("index.html");
 }
+
+ipcMain.handle("select-directory", async () => {
+    const result = await dialog.showOpenDialog({
+        properties: ["openDirectory"],
+    });
+
+    if (result.canceled) return null;
+
+    return result.filePaths[0];
+});
 
 app.whenReady().then(createWindow);
