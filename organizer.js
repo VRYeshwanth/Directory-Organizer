@@ -24,6 +24,8 @@ export async function organizeDirectory(directoryPath) {
         organized: 0,
         skippedFiles: 0,
         foldersFound: 0,
+        errors: 0,
+        conflicts: 0,
     };
 
     const items = await fs.readdir(directoryPath, { withFileTypes: true });
@@ -52,9 +54,19 @@ export async function organizeDirectory(directoryPath) {
         await fs.mkdir(destinationFolder, { recursive: true });
 
         const destinationPath = path.join(destinationFolder, fileName);
-        await fs.rename(filePath, destinationPath);
 
-        stats.organized++;
+        try {
+            await fs.access(destinationPath);
+            stats.conflicts++;
+            stats.skippedFiles++;
+        } catch (err) {
+            try {
+                await fs.rename(filePath, destinationPath);
+                stats.organized++;
+            } catch (err) {
+                stats.errors++;
+            }
+        }
     }
 
     return {
@@ -63,5 +75,7 @@ export async function organizeDirectory(directoryPath) {
         organized: stats.organized,
         skippedFiles: stats.skippedFiles,
         foldersFound: stats.foldersFound,
+        errors: stats.errors,
+        conflicts: stats.conflicts,
     };
 }

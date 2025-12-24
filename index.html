@@ -17,10 +17,6 @@
                 <button class="choose-btn">Choose Folder</button>
                 <button class="organize-btn">Organize</button>
             </div>
-            <div class="status-div">
-                <h2>Status :</h2>
-                <p class="status"></p>
-            </div>
         </div>
     </body>
     <script>
@@ -54,9 +50,12 @@
             const message = `
             Status: ${result.status}
             Files found: ${result.totalFiles}
-            Folders found: ${result.foldersFound}
             Organized: ${result.organized}
-            Skipped files: ${result.skippedFiles}`;
+            Skipped files: ${result.skippedFiles}
+            Folders found: ${result.foldersFound}
+            Errors: ${result.errors}
+            Conflicts: ${result.conflicts}
+            `;
 
             alert(message);
         });
