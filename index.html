@@ -9,13 +9,47 @@
     <body>
         <div class="container">
             <h1 class="heading">Directory Organizer</h1>
+            <p class="subtitle">Organize your files automatically by type</p>
             <div class="folder-info-div">
                 <h2>Selected Folder :</h2>
-                <h3 class="folder-selected"></h3>
+                <h3 class="folder-selected">No folder selected</h3>
             </div>
             <div class="buttons">
                 <button class="choose-btn">Choose Folder</button>
                 <button class="organize-btn">Organize</button>
+            </div>
+        </div>
+
+        <!-- Result Modal -->
+        <div class="modal-overlay hidden" id="resultModal">
+            <div class="modal">
+                <h2 class="modal-title">Organization Complete</h2>
+
+                <div class="modal-content">
+                    <p>
+                        <strong>Files found:</strong> <span id="m-files"></span>
+                    </p>
+                    <p>
+                        <strong>Folders found:</strong>
+                        <span id="m-folders"></span>
+                    </p>
+                    <p class="success">
+                        <strong>Organized:</strong>
+                        <span id="m-organized"></span>
+                    </p>
+                    <p class="warning">
+                        <strong>Skipped:</strong> <span id="m-skipped"></span>
+                    </p>
+                    <p class="error">
+                        <strong>Errors:</strong> <span id="m-errors"></span>
+                    </p>
+                    <p class="warning">
+                        <strong>Conflicts:</strong>
+                        <span id="m-conflicts"></span>
+                    </p>
+                </div>
+
+                <button class="modal-close">Close</button>
             </div>
         </div>
     </body>
@@ -47,17 +81,22 @@
                 selectedFolderPath
             );
 
-            const message = `
-            Status: ${result.status}
-            Files found: ${result.totalFiles}
-            Organized: ${result.organized}
-            Skipped files: ${result.skippedFiles}
-            Folders found: ${result.foldersFound}
-            Errors: ${result.errors}
-            Conflicts: ${result.conflicts}
-            `;
+            const modal = document.getElementById("resultModal");
 
-            alert(message);
+            document.getElementById("m-files").innerText = result.totalFiles;
+            document.getElementById("m-folders").innerText =
+                result.foldersFound;
+            document.getElementById("m-organized").innerText = result.organized;
+            document.getElementById("m-skipped").innerText =
+                result.skippedFiles;
+            document.getElementById("m-errors").innerText = result.errors;
+            document.getElementById("m-conflicts").innerText = result.conflicts;
+
+            modal.classList.remove("hidden");
+        });
+
+        document.querySelector(".modal-close").addEventListener("click", () => {
+            document.getElementById("resultModal").classList.add("hidden");
         });
     </script>
 </html>

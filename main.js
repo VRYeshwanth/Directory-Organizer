@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog, ipcMain } from "electron";
+import { app, BrowserWindow, dialog, ipcMain, Menu } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
 import { organizeDirectory } from "./organizer.js";
@@ -19,6 +19,7 @@ function createWindow() {
         },
     });
 
+    Menu.setApplicationMenu(null);
     mainWindow.loadFile("index.html");
 }
 
