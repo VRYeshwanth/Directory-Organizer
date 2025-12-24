@@ -25,6 +25,12 @@
         "win": {
             "icon": "assets/icon.ico",
             "target": "nsis"
+        },
+        "nsis": {
+            "installerIcon": "assets/icon.ico",
+            "uninstallerIcon": "assets/icon.ico",
+            "createDesktopShortcut": true,
+            "createStartMenuShortcut": true
         }
     },
     "devDependencies": {
