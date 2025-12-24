@@ -19,17 +19,32 @@ function getCategory(extension) {
 }
 
 export async function organizeDirectory(directoryPath) {
+    const stats = {
+        totalFiles: 0,
+        organized: 0,
+        skippedFiles: 0,
+        foldersFound: 0,
+    };
+
     const items = await fs.readdir(directoryPath, { withFileTypes: true });
 
     for (const item of items) {
-        if (!item.isFile()) continue;
+        if (!item.isFile()) {
+            stats.foldersFound++;
+            continue;
+        }
+
+        stats.totalFiles++;
 
         const fileName = item.name;
         const filePath = path.join(directoryPath, fileName);
 
         const extension = path.extname(filePath).slice(1).toLowerCase();
 
-        if (!extension) continue;
+        if (!extension) {
+            stats.skippedFiles++;
+            continue;
+        }
 
         const category = getCategory(extension);
         const destinationFolder = path.join(directoryPath, category);
@@ -38,7 +53,15 @@ export async function organizeDirectory(directoryPath) {
 
         const destinationPath = path.join(destinationFolder, fileName);
         await fs.rename(filePath, destinationPath);
+
+        stats.organized++;
     }
 
-    return { status: "Success" };
+    return {
+        status: "Completed",
+        totalFiles: stats.totalFiles,
+        organized: stats.organized,
+        skippedFiles: stats.skippedFiles,
+        foldersFound: stats.foldersFound,
+    };
 }

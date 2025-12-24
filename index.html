@@ -50,7 +50,15 @@
             const result = await window.api.organizeDirectory(
                 selectedFolderPath
             );
-            statusTag.innerText = result.status;
+
+            const message = `
+            Status: ${result.status}
+            Files found: ${result.totalFiles}
+            Folders found: ${result.foldersFound}
+            Organized: ${result.organized}
+            Skipped files: ${result.skippedFiles}`;
+
+            alert(message);
         });
     </script>
 </html>
