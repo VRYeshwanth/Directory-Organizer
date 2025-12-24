@@ -1,4 +1,11 @@
-import { app, BrowserWindow, dialog, ipcMain, Menu } from "electron";
+import {
+    app,
+    BrowserWindow,
+    dialog,
+    ipcMain,
+    Menu,
+    nativeImage,
+} from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
 import { organizeDirectory } from "./organizer.js";
@@ -7,10 +14,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function createWindow() {
+    const iconPath = path.join(__dirname, "assets", "icon.ico");
+
     const mainWindow = new BrowserWindow({
         width: 600,
         height: 600,
         resizable: false,
+        icon: iconPath,
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
             contextIsolation: true,

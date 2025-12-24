@@ -1,32 +1,50 @@
 # Directory Organizer
 
-A minimal Electron-based desktop application that organizes files in a selected directory based on their file extensions.  
-The app helps keep folders clean by automatically grouping files into extension-based subfolders.
+A clean and modern Electron-based desktop application that organizes files in a selected directory by grouping them into meaningful category-based folders.
+
+The app is designed as a lightweight utility to keep directories tidy with a single click, while providing clear feedback about what was organized, skipped, or failed.
 
 ---
 
 ## Features
 
--   Simple and minimal user interface
--   Organizes files based on their extensions (e.g., `.jpg`, `.pdf`, `.mp3`)
--   Creates folders automatically if they do not exist
--   Works on local directories
+-   Modern and minimal user interface
+-   Organizes files into category-based folders (Images, Documents, PDFs, Archives, etc.)
+-   Automatically creates category folders if they do not exist
+-   Displays statistics after each organize operation
+-   Safely handles file conflicts and errors without crashing
+-   Works on any local directory
 
 ---
 
 ## How It Works
 
-1. Select a directory.
-2. The app scans all files in the directory.
-3. Files are moved into folders named after their extensions.
-    - Example:
-        ```
-        Downloads/
-        ├── jpg/
-        ├── pdf/
-        ├── mp3/
-        └── txt/
-        ```
+1. Select a directory using the file picker.
+2. The app scans all files in the selected directory (non-recursive).
+3. Each file is categorized based on its extension.
+4. Files are moved into folders named after their category.
+5. A results modal displays detailed statistics.
+
+### Example structure after organizing
+
+    ```
+    Downloads/
+    ├── Images/
+    ├── PDF/
+    ├── Documents/
+    └── Archives/
+    ```
+
+## Result Statistics
+
+After organizing, the app shows:
+
+-   Total files found
+-   Number of folders detected
+-   Files successfully organized
+-   Skipped files (unsupported or ignored)
+-   Conflicts (existing files)
+-   Errors (permission or move failures)
 
 ---
 
@@ -57,4 +75,5 @@ npm start
 
 ### Screenshots
 
-![Image 1](./images/Image%201.png)
+![Main UI](./assets/images/Image%201.png)
+![Results Modal](./assets/images/Image%202.png)
